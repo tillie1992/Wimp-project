@@ -12,19 +12,27 @@ import javax.persistence.Id;
 public class Movie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(length =300, nullable=false)
+
+	@Column(length = 300, nullable = false)
 	private String title;
-	
+
 	private Date releaseDate;
-	
+
 	private Long budget;
-	
-	@Column(length=500, nullable= false)
+
+	@Column(length = 500, nullable = false)
 	private String distributor;
+
 	public Movie() {
+
+	}
+	public Movie(String title, Date releaseDate, Long budget, String distributor) {
+		this.title=title;
+		this.releaseDate=releaseDate;
+		this.budget=budget;
+		this.distributor=distributor;
 		
 	}
 

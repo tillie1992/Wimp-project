@@ -12,20 +12,27 @@ import javax.persistence.Id;
 public class Actor {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(length=75, nullable=false)
+
+	@Column(length = 75, nullable = false)
 	private String firstName;
-	
-	@Column(length=75)
+
+	@Column(length = 75)
 	private String lastName;
-	
+
 	private Long activeSinceYear;
-	
+
 	private Date birthDate;
-	
+
 	public Actor() {
+
+	}
+	public Actor(String firstName, String lastName, Long activeSinceYear, Date birthDate) {
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.activeSinceYear=activeSinceYear;
+		this.birthDate=birthDate;
 		
 	}
 
