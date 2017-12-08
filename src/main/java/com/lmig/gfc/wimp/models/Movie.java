@@ -1,12 +1,14 @@
 package com.lmig.gfc.wimp.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Movie {
@@ -14,6 +16,9 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@ManyToMany(mappedBy = "movies")
+	private List<Actor> actors;
 
 	@Column(length = 300, nullable = false)
 	private String title;
@@ -28,12 +33,13 @@ public class Movie {
 	public Movie() {
 
 	}
+
 	public Movie(String title, Date releaseDate, Long budget, String distributor) {
-		this.title=title;
-		this.releaseDate=releaseDate;
-		this.budget=budget;
-		this.distributor=distributor;
-		
+		this.title = title;
+		this.releaseDate = releaseDate;
+		this.budget = budget;
+		this.distributor = distributor;
+
 	}
 
 	public Long getId() {
@@ -75,4 +81,13 @@ public class Movie {
 	public void setDistributor(String distributor) {
 		this.distributor = distributor;
 	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+
 }

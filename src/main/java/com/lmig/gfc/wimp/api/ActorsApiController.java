@@ -18,14 +18,15 @@ import com.lmig.gfc.wimp.repositories.ActorRepository;
 
 @RestController
 @RequestMapping("/api/actors")
-public class ActorApiController {
+public class ActorsApiController {
 
 	private ActorRepository actorRepository;
 
-	public ActorApiController(ActorRepository actorRepository) {
+	public ActorsApiController(ActorRepository actorRepository) {
 		this.actorRepository = actorRepository;
 	}
 
+	// Change all the return type references from Actor to ActorView
 	@GetMapping("")
 	public List<Actor> getAll() {
 		return actorRepository.findAll();
@@ -33,28 +34,32 @@ public class ActorApiController {
 	}
 
 	@GetMapping("{id}")
-	public Actor getOne(@PathVariable Long id) {
-		return actorRepository.findOne(id);
-
+	public ActorView getOne(@PathVariable Long id) {
+		Actor actor = actorRepository.findOne(id);
+		ActorView view = new ActorView(actor);
+		return view;
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Actor create(@RequestBody Actor actor) {
-		return actorRepository.save(actor);
+	public ActorView create(@RequestBody Actor actor) {
+		ActorView view = new ActorView(actor);
+		return view;
 	}
 
 	@PutMapping("{id}")
-	public Actor update(@RequestBody Actor actor, @PathVariable long id) {
+	public ActorView update(@RequestBody Actor actor, @PathVariable long id) {
 		actor.setId(id);
-		return actorRepository.save(actor);
+		ActorView view = new ActorView(actor);
+		return view;
 
 	}
 
 	@DeleteMapping("{id}")
-	public Actor delete(@PathVariable long id) {
+	public ActorView delete(@PathVariable long id) {
 		Actor actor = actorRepository.findOne(id);
-		return actor;
+		ActorView view = new ActorView(actor);
+		return view;
 
 	}
 }
