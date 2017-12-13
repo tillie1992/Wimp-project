@@ -43,13 +43,16 @@ public class ActorsApiController {
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ActorView create(@RequestBody Actor actor) {
+		actorRepository.save(actor);
 		ActorView view = new ActorView(actor);
 		return view;
+		
 	}
 
 	@PutMapping("{id}")
 	public ActorView update(@RequestBody Actor actor, @PathVariable long id) {
 		actor.setId(id);
+		actorRepository.save(actor);
 		ActorView view = new ActorView(actor);
 		return view;
 
@@ -58,6 +61,7 @@ public class ActorsApiController {
 	@DeleteMapping("{id}")
 	public ActorView delete(@PathVariable long id) {
 		Actor actor = actorRepository.findOne(id);
+		actorRepository.delete(id);
 		ActorView view = new ActorView(actor);
 		return view;
 
